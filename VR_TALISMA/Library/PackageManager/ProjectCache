@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638732398220018953
-    m_Hash: 502089538
+      ticks: 638732451398806223
+    m_Hash: 506022240
   m_LockFileStatus:
     m_FilePath: C:/Wagner/unity-vr/VR_TALISMA/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638732398220307712
-    m_Hash: 3452141782
+      ticks: 638732451398806223
+    m_Hash: 4087584027
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
