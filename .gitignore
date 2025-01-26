@@ -71,6 +71,7 @@ ExportedObj/
 
 # Permitir a inclusão da pasta Assets e seus conteúdos
 !VR_TALISMA/Assets/
+!VR_TALISMA/Assets/*
 !VR_TALISMA/Assets/**
 
 # Permitir a inclusão da pasta ProjectSettings
