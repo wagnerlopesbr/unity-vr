@@ -46,6 +46,16 @@ public class HandPresence : MonoBehaviour
         }
     }
 
+    // Wagner:
+    public float GetTriggerValue()
+    {
+        if (targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue))
+        {
+            return triggerValue;
+        }
+        return 0f; // Se não tiver valor, retorna 0
+    }
+
     // Update is called once per frame
     void Update()
     {
