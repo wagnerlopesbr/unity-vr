@@ -2,36 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit; // Importa para usar XR Grab Interactable
 
 public class FireExtinguisherSmokeScript : MonoBehaviour
 {
     public ParticleSystem smokeEffect; // Referência ao VFX (Particle System)
-    public HandPresence leftHandPresence; // Referência ao script HandPresence para a mão esquerda
-    public HandPresence rightHandPresence; // Referência ao script HandPresence para a mão direita
+    public XRGrabInteractable grabInteractable; // Referência ao sistema de pegar objetos
+    public HandPresence leftHandPresence; // Referência à mão esquerda
+    public HandPresence rightHandPresence; // Referência à mão direita
     private bool isSpraying = false; // Estado do jato
 
     void Start()
     {
-        // Certifique-se de que as referências para as mãos não são nulas
+        // Verifica se o extintor tem o componente XRGrabInteractable
+        if (grabInteractable == null)
+        {
+            grabInteractable = GetComponent<XRGrabInteractable>();
+        }
+
+        // Se não houver referências para as mãos, tenta pegar automaticamente
         if (leftHandPresence == null)
         {
-            leftHandPresence = GetComponentInParent<HandPresence>(); // Se não, tenta pegar o script da mão esquerda
+            leftHandPresence = GetComponentInParent<HandPresence>();
         }
 
         if (rightHandPresence == null)
         {
-            rightHandPresence = GetComponentInParent<HandPresence>(); // Se não, tenta pegar o script da mão direita
+            rightHandPresence = GetComponentInParent<HandPresence>();
         }
     }
 
     void Update()
     {
-        // Verifica se qualquer uma das mãos está pressionando o gatilho
+        // Verifica se o extintor está sendo segurado
+        bool isGrabbed = grabInteractable != null && grabInteractable.isSelected;
+
+        // Verifica se alguma das mãos está pressionando o gatilho
         bool isLeftTriggerPressed = leftHandPresence != null && leftHandPresence.GetTriggerValue() > 0.5f;
         bool isRightTriggerPressed = rightHandPresence != null && rightHandPresence.GetTriggerValue() > 0.5f;
 
-        // Se qualquer uma das mãos estiver pressionando o gatilho, ativa a fumaça
-        if (isLeftTriggerPressed || isRightTriggerPressed)
+        // Só ativa se o extintor estiver segurado E o gatilho pressionado
+        if (isGrabbed && (isLeftTriggerPressed || isRightTriggerPressed))
         {
             if (!isSpraying)
             {
