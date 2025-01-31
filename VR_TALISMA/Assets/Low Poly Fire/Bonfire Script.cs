@@ -6,10 +6,23 @@ public class BonfireScript : MonoBehaviour
 {
     public ParticleSystem fireParticleSystem; // Referência ao Particle System do fogo
     public ParticleSystem smokeEffect; // Referência ao Particle System da fumaça
-    public Text congratulationsText; // Referência ao texto de parabéns
+    public GameObject afterCanvas;
 
     private float collisionTime = 0f; // Tempo de colisão
     private bool isCollidingWithSmoke = false; // Se está colidindo com a fumaça
+
+    void Start()
+    {
+        // Garante que o Canvas começa invisível
+        if (afterCanvas != null)
+        {
+            afterCanvas.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("O GameObject afterCanvas não foi atribuído no Inspector!");
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -67,9 +80,9 @@ public class BonfireScript : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         // Exibe o texto "PARABÉNS!"
-        if (congratulationsText != null)
+        if (afterCanvas != null)
         {
-            congratulationsText.gameObject.SetActive(true);
+            afterCanvas.SetActive(true);
             Debug.Log("Texto PARABÉNS! visível");
         }
         else
